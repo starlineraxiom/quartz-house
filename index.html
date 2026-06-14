@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>416 Quartz St — Property &amp; Permit Analysis</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --ink:#e7ebf0; --muted:#9aa4b2; --accent:#4f9cf9; --accent2:#5ad19a;
+    --warn:#f5b94a; --bad:#f0746a; --good:#5ad19a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+  header.hero{background:linear-gradient(160deg,#1b2230,#0f1115);border-bottom:1px solid var(--line);padding:54px 0 40px}
+  .eyebrow{color:var(--accent);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600}
+  h1{font-size:34px;margin:10px 0 6px;line-height:1.2}
+  .sub{color:var(--muted);font-size:15px}
+  .price{font-size:40px;font-weight:700;margin-top:18px}
+  .price small{font-size:15px;color:var(--muted);font-weight:400}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:26px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+  .stat .v{font-size:20px;font-weight:600;margin-top:4px}
+
+  nav{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.86);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
+  nav a{color:var(--muted);font-size:14px;font-weight:500}
+  nav a:hover{color:var(--ink);text-decoration:none}
+
+  section{padding:38px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:24px;margin:0 0 6px}
+  h2 .num{color:var(--accent);font-weight:700;margin-right:8px}
+  .lead{color:var(--muted);margin:0 0 22px}
+
+  .callout{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent);
+    border-radius:10px;padding:16px 18px;margin:18px 0}
+  .callout.warn{border-left-color:var(--warn)}
+  .callout.good{border-left-color:var(--good)}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px;overflow:hidden;border-radius:10px}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--panel2);color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.subject td{background:rgba(79,156,249,.12)!important;font-weight:600}
+  .tablewrap{overflow-x:auto}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:6px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .card h3{margin:0 0 8px;font-size:15px}
+  .pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+  .pill.good{background:rgba(90,209,154,.15);color:var(--good)}
+  .pill.warn{background:rgba(245,185,74,.15);color:var(--warn)}
+  .pill.info{background:rgba(79,156,249,.15);color:var(--accent)}
+
+  ul.tight{margin:8px 0;padding-left:20px}
+  ul.tight li{margin:6px 0}
+  .muted{color:var(--muted)}
+  .timeline{list-style:none;margin:0;padding:0}
+  .timeline li{position:relative;padding:8px 0 8px 22px;border-left:2px solid var(--line);margin-left:6px}
+  .timeline li::before{content:"";position:absolute;left:-7px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .timeline .d{color:var(--accent);font-weight:600;font-size:13px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+
+  footer{padding:30px 0;color:var(--muted);font-size:13px}
+  .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-right:6px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Property &amp; Permit Analysis</div>
+    <h1>416 Quartz St, Redwood City, CA 94062</h1>
+    <div class="sub">Eagle Hill neighborhood · APN 058-134-280 · Block 206 / Lot 6099 · Prepared June 13, 2026</div>
+    <div class="price">$3,988,000 <small>· $1,375 / sqft</small></div>
+
+    <div class="stats">
+      <div class="stat"><div class="k">Beds / Baths</div><div class="v">4 / 3.5</div></div>
+      <div class="stat"><div class="k">Living area</div><div class="v">2,901 sqft</div></div>
+      <div class="stat"><div class="k">Lot size</div><div class="v">~8,910 sqft</div></div>
+      <div class="stat"><div class="k">Renovation final</div><div class="v">Jun 5, 2026</div></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#story">The Story</a>
+    <a href="#permits">Permits</a>
+    <a href="#flags">Diligence</a>
+    <a href="#comps">Comps</a>
+    <a href="#bottom">Bottom Line</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="story">
+    <h2><span class="num">1</span>The headline</h2>
+    <p class="lead">What you're actually buying.</p>
+    <div class="callout">
+      This home just came out of a <strong>~13-month, fully-permitted, down-to-the-structure
+      renovation and addition</strong>. The final building inspection was signed off on
+      <strong>June 5, 2026 — eight days before this analysis</strong>. In practice you are buying
+      a near-new house inside an older shell: new foundation, new 200-amp service, new plumbing,
+      framing, roof, and finishes.
+    </div>
+  </section>
+
+  <section id="permits">
+    <h2><span class="num">2</span>Permit history</h2>
+    <p class="lead">Three permits on record — one old, two that define the current house.</p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="pill info">2003 · Finaled</span>
+        <h3>B03-1875 — Re-roof</h3>
+        <p class="muted" style="font-size:14px;margin:0">Tear-off of wood shingles, felt + 30-yr
+        composition roof. Routine. 2003 inspector flagged "big knots and weak boards" in the
+        sheathing then — likely superseded by the 2025 roof re-nail.</p>
+      </div>
+      <div class="card">
+        <span class="pill good">2024–2026 · Finaled ★</span>
+        <h3>B24-1660 — Addition &amp; Remodel</h3>
+        <p class="muted" style="font-size:14px;margin:0">On paper "add &amp; remodel 260 sf to 1st
+        floor &amp; 260 sf to basement." In the field, a gut renovation — see scope below.</p>
+      </div>
+      <div class="card">
+        <span class="pill warn">2025–2026 · Finaled*</span>
+        <h3>CP25-0249 — Sewer lateral</h3>
+        <p class="muted" style="font-size:14px;margin:0">New SDR-26 lateral + public cleanout under
+        the sidewalk. <strong>Open thread:</strong> ENG ADMIN review went to HOLD 5/26/2026; city
+        asked for an encroachment permit. Confirm closed before COE.</p>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:24px">
+      <div>
+        <h3 style="font-size:16px">B24-1660 scope (what was really done)</h3>
+        <ul class="tight">
+          <li><strong>New foundation</strong> — 13 piers/caissons (4 front, 9 back); engineer letters required before pour</li>
+          <li><strong>New 200-amp electrical service</strong> + garage subpanel (meter release 9/8/2025)</li>
+          <li><strong>Shear walls</strong> rebuilt (corrected, then approved)</li>
+          <li>New roof nailing, framing, insulation, sheetrock</li>
+          <li>New plumbing (rough + underground), mechanical, full bath rebuild</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size:16px">Timeline</h3>
+        <ul class="timeline">
+          <li><span class="d">Aug 5, 2024</span><br>Application filed</li>
+          <li><span class="d">Sep '24 – Mar '25</span><br>3+ plan-review cycles (incomplete plans, eng &amp; planning holds)</li>
+          <li><span class="d">Apr 22, 2025</span><br>Approved with conditions</li>
+          <li><span class="d">May 8, 2025</span><br>Permit issued — construction begins</li>
+          <li><span class="d">Jun 5, 2026</span><br><strong>Final building inspection passed</strong></li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="font-size:13.5px">~9 months in plan check and ~13 months of construction.
+    Permit fees were modest (~$14K), consistent with a 260 sf "addition" on paper while field work
+    was a full gut.</p>
+  </section>
+
+  <section id="flags">
+    <h2><span class="num">3</span>Diligence &amp; watch-items</h2>
+    <p class="lead">Nothing alarming, but concrete things to verify.</p>
+    <ul class="tight">
+      <li><strong>Investor/developer renovation, not a long-term owner's home.</strong> Listed within
+        days of final. Scrutinize finish quality; ask who the GC and structural engineer were and
+        whether there's a workmanship warranty.</li>
+      <li><strong>Construction-period neighbor friction:</strong> a dust complaint over stone-cutting
+        (Apr 2026) and a trench-shoring safety correction (Jul 2025). Both resolved, but they point
+        to an aggressive job site.</li>
+      <li><strong>Final punch list (5/22/2026), cleared 6/5/2026:</strong> missing stair handrails,
+        UV insulation on outdoor water-heater lines, bath-fan humidity sensors, attic-furnace GFCI,
+        intersystem bonding, water-heater jumper bond, and a too-temporary support penetrating the
+        <em>garage firewall</em> for the ejector-pump drain. Verify the firewall fix is permanent.</li>
+      <li><strong>Basement + sewage ejector pump</strong> (mechanical, needs maintenance) and a
+        13-pier foundation suggest a sloped lot with soils/drainage considerations — ask for a
+        geotech report.</li>
+      <li><strong>Outdoor water heater</strong> (lines needed UV insulation) — confirm it's tankless
+        and properly weather/freeze protected.</li>
+    </ul>
+  </section>
+
+  <section id="comps">
+    <h2><span class="num">4</span>Pricing vs. comps</h2>
+    <p class="lead">All nine listings on a price-per-square-foot basis.</p>
+    <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>Property</th><th>City</th><th class="num">Price</th><th>BD/BA</th><th class="num">Sqft</th><th class="num">$/sqft</th></tr>
+      </thead>
+      <tbody>
+        <tr class="subject"><td>416 Quartz St (Subject)</td><td>Redwood City · Eagle Hill</td><td class="num">$3,988,000</td><td>4/3.5</td><td class="num">2,901</td><td class="num">$1,375</td></tr>
+        <tr><td>3860 Autumn Dr</td><td>Redwood City 94061</td><td class="num">$2,698,000</td><td>4/3.0</td><td class="num">2,035</td><td class="num">$1,326</td></tr>
+        <tr><td>685 Upland Rd</td><td>Redwood City</td><td class="num">$4,498,000</td><td>4/4.5</td><td class="num">3,474</td><td class="num">$1,295</td></tr>
+        <tr><td>3751 El Centro St</td><td>Palo Alto 94306</td><td class="num">$4,288,000</td><td>5/6.0</td><td class="num">3,635</td><td class="num">$1,180</td></tr>
+        <tr><td>630 San Benito Ave</td><td>Menlo Park 94025</td><td class="num">$2,688,000</td><td>4/2.5</td><td class="num">2,400</td><td class="num">$1,120</td></tr>
+        <tr><td>313 Lakeview Way</td><td>Emerald Hills</td><td class="num">$3,399,000</td><td>4/3.5</td><td class="num">3,055</td><td class="num">$1,113</td></tr>
+        <tr><td>927 Wilmington Way</td><td>Emerald Hills</td><td class="num">$4,900,000</td><td>5/4.5</td><td class="num">4,480</td><td class="num">$1,094</td></tr>
+        <tr><td>1969 Kentucky St</td><td>Redwood City 94061</td><td class="num">$3,149,000</td><td>5/3.0</td><td class="num">2,897</td><td class="num">$1,087</td></tr>
+        <tr><td>360 Oxford Ave</td><td>Palo Alto 94306</td><td class="num">$4,688,000</td><td>4/3.0</td><td class="num">2,454</td><td class="num">$1,910</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout warn">
+      <strong>Comp-set median ≈ $1,150/sqft. The subject at $1,375 sits ~20% above it</strong> — the
+      highest $/sqft of any Redwood City / Emerald Hills comp (only Palo Alto's Oxford Ave is higher,
+      a pricier submarket).
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>vs. 313 Lakeview Way</h3>
+        <p class="muted" style="font-size:14px;margin:0">Same 4/3.5, <em>larger</em> at 3,055 sqft,
+        listed $3.399M. Subject asks <strong>+$589K for ~150 fewer sqft</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>vs. 1969 Kentucky St</h3>
+        <p class="muted" style="font-size:14px;margin:0">Nearly identical size (2,897 sqft), listed
+        $3.149M, but in the 94061 flats. Subject asks <strong>+$839K</strong>.</p>
+      </div>
+    </div>
+    <p style="margin-top:18px">The premium is being paid almost entirely for <strong>condition</strong>
+    — brand-new structure and systems vs. older/larger comps. Defensible for a turnkey "new" house,
+    but on pure size it's top-of-submarket pricing with little headroom.</p>
+  </section>
+
+  <section id="bottom">
+    <h2><span class="num">5</span>Bottom line</h2>
+    <div class="grid2">
+      <div>
+        <h3 style="color:var(--good)">Pros</h3>
+        <ul class="tight">
+          <li>Effectively new: foundation, 200-amp service, plumbing, framing, roof, baths — all permitted and finaled 6/5/2026. Low near-term capex risk.</li>
+          <li>Eagle Hill / Emerald Hills commands a premium over the 94061 flats.</li>
+          <li>Clean permit closure — additions are legal and finaled (no unpermitted-work risk).</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:var(--bad)">Cons / watch-items</h3>
+        <ul class="tight">
+          <li>Top-of-submarket $/sqft (~20% over median); premium rides entirely on condition.</li>
+          <li>Investor renovation — verify build quality, GC/engineer, warranties.</li>
+          <li>Two construction-period complaints (dust, trench shoring).</li>
+          <li>Open sewer-lateral encroachment / ENG hold — confirm closed before COE.</li>
+          <li>Hillside lot + ejector pump + outdoor water heater = ongoing maintenance points.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px">Questions for the listing agent</h3>
+    <ul class="tight">
+      <li>Who was the GC and structural engineer, and is there a workmanship warranty?</li>
+      <li>Is the CP25-0249 sewer encroachment permit / ENG hold fully resolved?</li>
+      <li>Does the 2,901 sqft include the new finished basement? Bedroom/bath split by floor?</li>
+      <li>Was the ejector-pump firewall support permanently corrected (final punch item)?</li>
+      <li>Is there a soils/geotech report for the 13-pier foundation?</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span class="tag">Data as supplied</span>
+  <span class="tag">Not investment advice</span>
+  Figures derive from the listing data and Redwood City permit records provided. Live Redfin
+  fields (days on market, year built, tax history) were not pulled. Seller contact details
+  intentionally omitted.
+</footer>
+
+</body>
+</html>

@@ -73,6 +73,10 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   @media(max-width:720px){.grid2{grid-template-columns:1fr}}
 
+  .mapwrap{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:6px 0 4px}
+  .mapwrap iframe{display:block;width:100%;height:360px;border:0;filter:grayscale(.15)}
+  .maplink{font-size:13px;color:var(--muted);margin:2px 0 0}
+
   footer{padding:30px 0;color:var(--muted);font-size:13px}
   .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-right:6px}
 </style>
@@ -246,6 +250,11 @@
     <h2><span class="num">5</span>Commute</h2>
     <p class="lead">Approximate driving times in typical Peninsula traffic. The home sits in the
     Eagle Hill hills just SW of downtown Redwood City, with quick access to both US-101 and I-280.</p>
+    <div class="mapwrap">
+      <iframe loading="lazy" title="Map of 416 Quartz St, Redwood City"
+        src="https://www.google.com/maps?q=416+Quartz+St,+Redwood+City,+CA+94062&z=13&output=embed"></iframe>
+    </div>
+    <p class="maplink">📍 416 Quartz St, Redwood City · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/3375+Edison+Way,+Menlo+Park,+CA" target="_blank" rel="noopener">Directions to Synapse</a> · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/3410+Hillview+Ave,+Palo+Alto,+CA" target="_blank" rel="noopener">to SAP</a> · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/1600+Amphitheatre+Pkwy,+Mountain+View,+CA" target="_blank" rel="noopener">to Googleplex</a></p>
     <div class="tablewrap">
     <table>
       <thead>
@@ -273,6 +282,12 @@
     <h2><span class="num">6</span>Walkability</h2>
     <p class="lead">Eagle Hill is a quiet, hilly, almost entirely residential pocket — pleasant to walk
     <em>in</em>, but you drive to most errands.</p>
+
+    <div class="mapwrap">
+      <iframe loading="lazy" title="Eagle Hill neighborhood around 416 Quartz St"
+        src="https://www.google.com/maps?q=416+Quartz+St,+Redwood+City,+CA+94062&z=16&output=embed"></iframe>
+    </div>
+    <p class="maplink" style="margin-bottom:18px">Eagle Hill, Redwood City — hilly streets that follow the contour of the hill.</p>
 
     <div class="stats" style="margin-bottom:20px">
       <div class="stat"><div class="k">Walk Score (nearby 434 Quartz)</div><div class="v">~55 <small class="muted" style="font-size:13px">Somewhat Walkable</small></div></div>

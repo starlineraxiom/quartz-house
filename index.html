@@ -4,261 +4,294 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Quartz House — Property &amp; Permit Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
-    --ink:#e7ebf0; --muted:#9aa4b2; --accent:#4f9cf9; --accent2:#5ad19a;
-    --warn:#f5b94a; --bad:#f0746a; --good:#5ad19a;
+    --cream:#faf8f4; --warm-white:#fff; --ink:#1c1c1e; --ink-light:#4a4a52;
+    --ink-muted:#8a8a96; --accent:#c8773a; --accent-light:#f5ede3;
+    --green:#2e7d5a; --green-light:#e8f5ee; --red:#b4452e; --red-light:#f8ebe7;
+    --border:#e8e6e1; --shadow:0 2px 20px rgba(0,0,0,.07); --shadow-lg:0 8px 40px rgba(0,0,0,.12);
+    --radius:16px;
   }
-  *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent)}
 
-  header.hero{background:linear-gradient(160deg,#1b2230,#0f1115);border-bottom:1px solid var(--line);padding:54px 0 40px}
-  .eyebrow{color:var(--accent);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600}
-  h1{font-size:34px;margin:10px 0 6px;line-height:1.2}
-  .sub{color:var(--muted);font-size:15px}
-  .price{font-size:40px;font-weight:700;margin-top:18px}
-  .price small{font-size:15px;color:var(--muted);font-weight:400}
+  /* HEADER */
+  .site-header{background:var(--ink);color:#fff;padding:3.2rem 2rem 2.6rem;text-align:center}
+  .site-header .label{font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
+  .site-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:500;line-height:1.05;margin-bottom:.5rem}
+  .site-header .subtitle{font-size:.9rem;color:rgba(255,255,255,.55);font-weight:300;max-width:680px;margin:0 auto}
+  .site-header .price-row{margin-top:1.6rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;align-items:baseline}
+  .site-header .price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600}
+  .site-header .price small{font-size:.85rem;color:rgba(255,255,255,.5);font-weight:300;font-family:'Inter'}
 
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:26px}
-  .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-  .stat .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-  .stat .v{font-size:20px;font-weight:600;margin-top:4px}
+  /* NAV STRIP */
+  .navstrip{background:#fff;border-bottom:1px solid var(--border);padding:.9rem 1.5rem;position:sticky;top:0;z-index:10;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .navstrip__inner{display:inline-flex;gap:.6rem;align-items:center;min-width:100%}
+  .nav-chip{font-size:.8rem;font-weight:500;color:var(--ink);text-decoration:none;background:var(--cream);border:1px solid var(--border);border-radius:50px;padding:.45rem 1rem;transition:all .15s ease;flex-shrink:0}
+  .nav-chip:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
 
-  nav{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.86);backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line)}
-  nav .wrap{display:flex;gap:18px;flex-wrap:wrap;padding:12px 20px}
-  nav a{color:var(--muted);font-size:14px;font-weight:500}
-  nav a:hover{color:var(--ink);text-decoration:none}
+  /* LAYOUT */
+  .main{max-width:1120px;margin:0 auto;padding:3rem 1.5rem 2rem}
+  section{margin-bottom:3.4rem}
+  .section-heading{font-family:'Cormorant Garamond',serif;font-size:1.85rem;font-weight:500;margin-bottom:1.4rem;display:flex;align-items:center;gap:1rem}
+  .section-heading .n{font-size:.95rem;font-weight:600;font-family:'Inter';color:var(--accent);background:var(--accent-light);width:1.9rem;height:1.9rem;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .section-heading::after{content:'';flex:1;height:1px;background:var(--border)}
+  .lead{color:var(--ink-light);margin-bottom:1.4rem;max-width:760px}
 
-  section{padding:38px 0;border-bottom:1px solid var(--line)}
-  h2{font-size:24px;margin:0 0 6px}
-  h2 .num{color:var(--accent);font-weight:700;margin-right:8px}
-  .lead{color:var(--muted);margin:0 0 22px}
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:140px;gap:.6rem;border-radius:var(--radius);overflow:hidden}
+  .gallery a{display:block;overflow:hidden;border-radius:10px;background:#e8e4dc}
+  .gallery a img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease;display:block}
+  .gallery a:hover img{transform:scale(1.05)}
+  .gallery a.feat{grid-column:span 2;grid-row:span 2}
+  @media(max-width:720px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px}.gallery a.feat{grid-column:span 2;grid-row:span 2}}
+  .gallery-note{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;margin-top:1rem}
+  .gallery-note span{font-size:.78rem;color:var(--ink-muted)}
 
-  .callout{background:var(--panel2);border:1px solid var(--line);border-left:4px solid var(--accent);
-    border-radius:10px;padding:16px 18px;margin:18px 0}
-  .callout.warn{border-left-color:var(--warn)}
-  .callout.good{border-left-color:var(--good)}
+  /* CARD / PANEL */
+  .panel{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.7rem}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem}
+  .pcard{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.5rem}
+  .pcard h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:500;margin:.5rem 0 .5rem}
+  .pcard p{font-size:.85rem;color:var(--ink-light)}
 
-  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px;overflow:hidden;border-radius:10px}
-  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
-  th{background:var(--panel2);color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-  tr:nth-child(even) td{background:rgba(255,255,255,.015)}
-  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-  tr.subject td{background:rgba(79,156,249,.12)!important;font-weight:600}
-  .tablewrap{overflow-x:auto}
+  /* SNAPSHOT STATS */
+  .snapshot{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .snap{padding:1.3rem 1.4rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .snap .k{font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-muted)}
+  .snap .v{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:600;margin-top:.2rem}
 
-  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:6px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
-  .card h3{margin:0 0 8px;font-size:15px}
-  .pill{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;margin-bottom:8px}
-  .pill.good{background:rgba(90,209,154,.15);color:var(--good)}
-  .pill.warn{background:rgba(245,185,74,.15);color:var(--warn)}
-  .pill.info{background:rgba(79,156,249,.15);color:var(--accent)}
+  /* PILLS / BADGES */
+  .pill{display:inline-block;font-size:.64rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .7rem;border-radius:50px;margin-bottom:.6rem}
+  .pill.green{background:var(--green-light);color:var(--green)}
+  .pill.accent{background:var(--accent-light);color:var(--accent)}
+  .pill.muted{background:var(--cream);color:var(--ink-muted);border:1px solid var(--border)}
 
-  ul.tight{margin:8px 0;padding-left:20px}
-  ul.tight li{margin:6px 0}
-  .muted{color:var(--muted)}
-  .timeline{list-style:none;margin:0;padding:0}
-  .timeline li{position:relative;padding:8px 0 8px 22px;border-left:2px solid var(--line);margin-left:6px}
-  .timeline li::before{content:"";position:absolute;left:-7px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
-  .timeline .d{color:var(--accent);font-weight:600;font-size:13px}
+  /* CALLOUT */
+  .callout{background:var(--accent-light);border-radius:12px;padding:1.1rem 1.3rem;margin:1.2rem 0;font-size:.92rem;color:var(--ink-light)}
+  .callout strong{color:var(--ink)}
+  .callout.warn{background:#fbf2e3}
+  .callout.bad{background:var(--red-light)}
+  .callout.good{background:var(--green-light)}
 
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  /* LISTS */
+  ul.tight{margin:.4rem 0 .4rem 1.1rem}
+  ul.tight li{margin:.45rem 0;font-size:.92rem;color:var(--ink-light)}
+  ul.tight li strong{color:var(--ink);font-weight:600}
+
+  /* TABLES */
+  .table-wrap{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:.85rem}
+  thead tr{background:var(--ink);color:#fff}
+  thead th{padding:.9rem 1rem;text-align:left;font-weight:500;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+  thead th.num{text-align:right}
+  tbody tr{border-bottom:1px solid var(--border)}
+  tbody tr:last-child{border-bottom:none}
+  tbody tr:hover{background:var(--cream)}
+  tbody td{padding:.8rem 1rem;color:var(--ink-light);vertical-align:middle}
+  tbody td:first-child{font-weight:500;color:var(--ink);white-space:nowrap}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.subject td{background:var(--accent-light)!important}
+  tr.subject td:first-child{color:var(--accent)}
+
+  /* DETAILS / PERMITS */
+  details.permit{background:#fff;border-radius:12px;box-shadow:var(--shadow);margin:1rem 0;padding:0 1.4rem}
+  details.permit summary{cursor:pointer;padding:1.1rem 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+  details.permit summary::-webkit-details-marker{display:none}
+  details.permit summary .lbl{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500}
+  details.permit summary .code{font-family:'Inter';font-size:.7rem;font-weight:600;letter-spacing:.05em;color:var(--accent);background:var(--accent-light);padding:.25rem .6rem;border-radius:50px;margin-right:.7rem;vertical-align:middle}
+  details.permit summary .chev{color:var(--ink-muted);font-size:.8rem;transition:transform .2s}
+  details.permit[open] summary .chev{transform:rotate(90deg)}
+  details.permit .body{padding:.3rem 0 1.4rem;border-top:1px solid var(--border)}
+  dl.spec{display:grid;grid-template-columns:max-content 1fr;gap:.5rem 1.2rem;margin:1.1rem 0;font-size:.86rem}
+  dl.spec dt{color:var(--ink-muted)}
+  dl.spec dd{color:var(--ink)}
+  h4.mini{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-muted);margin:1.2rem 0 .5rem;font-weight:600}
+  table.insp{box-shadow:none;font-size:.82rem}
+  table.insp td{padding:.5rem .6rem;border-bottom:1px solid var(--border);color:var(--ink-light)}
+  table.insp td:first-child{white-space:nowrap;color:var(--ink-muted);font-weight:400}
+  .res{font-weight:600;white-space:nowrap}
+  .res.ok{color:var(--green)} .res.corr{color:var(--accent)} .res.hold{color:var(--red)}
+
+  /* BUTTONS / MAP */
+  .btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--ink);color:#fff;text-decoration:none;font-size:.82rem;font-weight:500;padding:.7rem 1.3rem;border-radius:8px;transition:background .15s ease}
+  .btn:hover{background:#333}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--border)}
+  .btn.ghost:hover{background:var(--cream)}
+  .mapwrap{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin:.4rem 0}
+  .mapwrap iframe{display:block;width:100%;height:380px;border:0}
+  .maplink{font-size:.78rem;color:var(--ink-muted);margin-top:.6rem}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
   @media(max-width:720px){.grid2{grid-template-columns:1fr}}
 
-  .mapwrap{position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:6px 0 4px}
-  .mapwrap iframe{display:block;width:100%;height:360px;border:0;filter:grayscale(.15)}
-  .maplink{font-size:13px;color:var(--muted);margin:2px 0 0}
-
-  .btn{display:inline-block;background:var(--accent);color:#04121f;font-weight:600;font-size:14px;
-    padding:11px 18px;border-radius:9px;border:1px solid var(--accent)}
-  .btn:hover{background:#6cb0ff;text-decoration:none}
-  .btn.ghost{background:transparent;color:var(--accent)}
-  .btn.ghost:hover{background:rgba(79,156,249,.12)}
-
-  details.permit{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:12px 0;padding:0 16px}
-  details.permit summary{cursor:pointer;padding:15px 0;font-weight:600;list-style:none;
-    display:flex;justify-content:space-between;gap:12px;align-items:center}
-  details.permit summary::-webkit-details-marker{display:none}
-  details.permit summary .chev{color:var(--muted);transition:transform .2s;font-size:13px}
-  details.permit[open] summary .chev{transform:rotate(90deg)}
-  details.permit summary .code{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:10px}
-  details.permit .body{padding:4px 0 18px;border-top:1px solid var(--line)}
-  dl.spec{display:grid;grid-template-columns:max-content 1fr;gap:7px 18px;margin:16px 0;font-size:14px}
-  dl.spec dt{color:var(--muted)}
-  dl.spec dd{margin:0}
-  h4.mini{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:18px 0 6px}
-  table.insp{font-size:13.5px;border-collapse:collapse;width:100%}
-  table.insp td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-  table.insp td:first-child{white-space:nowrap;color:var(--muted)}
-  .res{font-weight:600;white-space:nowrap}
-  .res.ok{color:var(--good)} .res.corr{color:var(--warn)} .res.hold{color:var(--bad)}
-
-  footer{padding:30px 0;color:var(--muted);font-size:13px}
-  .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-right:6px}
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:2.2rem 1.5rem;text-align:center;font-size:.78rem;line-height:1.7}
+  footer .tag{display:inline-block;border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:.15rem .6rem;margin:0 .2rem .5rem;color:rgba(255,255,255,.7)}
+  footer a{color:var(--accent)}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="eyebrow">Property &amp; Permit Analysis</div>
-    <h1>Quartz House</h1>
-    <div class="sub">416 Quartz St, Redwood City, CA 94062 · Eagle Hill · APN 058-134-280 · Block 206 / Lot 6099 · Prepared June 13, 2026</div>
+<header class="site-header">
+  <div class="label">Property &amp; Permit Analysis</div>
+  <h1>Quartz House</h1>
+  <div class="subtitle">416 Quartz St, Redwood City, CA 94062 · Eagle Hill · APN 058-134-280 · Prepared June 13, 2026</div>
+  <div class="price-row">
     <div class="price">$3,988,000 <small>· $1,375 / sqft</small></div>
-
-    <div class="stats">
-      <div class="stat"><div class="k">Beds / Baths</div><div class="v">4 / 3.5</div></div>
-      <div class="stat"><div class="k">Living area</div><div class="v">2,901 sqft</div></div>
-      <div class="stat"><div class="k">Lot size</div><div class="v">~8,910 sqft</div></div>
-      <div class="stat"><div class="k">Renovation final</div><div class="v">Jun 5, 2026</div></div>
-    </div>
   </div>
 </header>
 
-<nav>
-  <div class="wrap">
-    <a href="#photos">Photos</a>
-    <a href="#story">The Story</a>
-    <a href="#permits">Permits</a>
-    <a href="#flags">Diligence</a>
-    <a href="#comps">Comps</a>
-    <a href="#commute">Commute</a>
-    <a href="#walk">Walkability</a>
-    <a href="#bottom">Bottom Line</a>
+<div class="navstrip">
+  <div class="navstrip__inner">
+    <a class="nav-chip" href="#photos">Photos</a>
+    <a class="nav-chip" href="#snapshot">Snapshot</a>
+    <a class="nav-chip" href="#story">The Story</a>
+    <a class="nav-chip" href="#permits">Permits</a>
+    <a class="nav-chip" href="#flags">Diligence</a>
+    <a class="nav-chip" href="#comps">Comps</a>
+    <a class="nav-chip" href="#commute">Commute</a>
+    <a class="nav-chip" href="#walk">Walkability</a>
+    <a class="nav-chip" href="#bottom">Verdict</a>
   </div>
-</nav>
+</div>
 
-<main class="wrap">
+<main class="main">
 
+  <!-- PHOTOS -->
   <section id="photos">
-    <h2>Exterior &amp; photos</h2>
-    <p class="lead">Street-level view of the home below. The full interior + exterior photo gallery
-    lives on the Redfin listing.</p>
-    <div class="mapwrap">
+    <h2 class="section-heading">Photos</h2>
+    <div class="gallery">
+      <a class="feat" href="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_0.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_0.jpg" alt="416 Quartz St"></a>
+      <a href="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_1.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_1.jpg" alt="416 Quartz St"></a>
+      <a href="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_2.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_2.jpg" alt="416 Quartz St"></a>
+      <a href="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_3.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_3.jpg" alt="416 Quartz St"></a>
+      <a href="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_4.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_4.jpg" alt="416 Quartz St"></a>
+      <a href="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_5.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://ssl.cdn-redfin.com/photo/8/bigphoto/984/ML81968984_5.jpg" alt="416 Quartz St"></a>
+    </div>
+    <div class="gallery-note">
+      <span>Listing photos © the listing brokerage / MLS, served from Redfin. Click any image to enlarge.</span>
+      <a class="btn" href="https://www.redfin.com/CA/Redwood-City/416-Quartz-St-94062/home/833135" target="_blank" rel="noopener">View full listing on Redfin →</a>
+    </div>
+    <div class="mapwrap" style="margin-top:1.4rem">
       <iframe loading="lazy" title="Street View of 416 Quartz St"
         src="https://maps.google.com/maps?layer=c&amp;cbll=37.4754032,-122.2439038&amp;cbp=11,0,0,0,0&amp;output=svembed"></iframe>
     </div>
-    <p class="maplink">Drag to look around. Street View imagery © Google.</p>
-    <p style="margin-top:16px">
-      <a class="btn" href="https://www.redfin.com/CA/Redwood-City/416-Quartz-St-94062/home/833135"
-         target="_blank" rel="noopener">View all photos on Redfin →</a>
-    </p>
-    <p class="muted" style="font-size:13px;margin-top:12px">Listing photos are copyrighted by the
-    listing brokerage / MLS and are not reproduced here — the button opens them on Redfin.</p>
+    <p class="maplink">Street-level view — drag to look around. Imagery © Google.</p>
   </section>
 
+  <!-- SNAPSHOT -->
+  <section id="snapshot">
+    <h2 class="section-heading">Snapshot</h2>
+    <div class="snapshot">
+      <div class="snap"><div class="k">List price</div><div class="v">$3,988,000</div></div>
+      <div class="snap"><div class="k">Price / sqft</div><div class="v">$1,375</div></div>
+      <div class="snap"><div class="k">Beds / Baths</div><div class="v">4 / 3.5</div></div>
+      <div class="snap"><div class="k">Living area</div><div class="v">2,901 sf</div></div>
+      <div class="snap"><div class="k">Lot size</div><div class="v">~8,910 sf</div></div>
+      <div class="snap"><div class="k">Reno finaled</div><div class="v">Jun 5, 2026</div></div>
+    </div>
+  </section>
+
+  <!-- STORY -->
   <section id="story">
-    <h2><span class="num">1</span>The headline</h2>
-    <p class="lead">What you're actually buying.</p>
+    <h2 class="section-heading"><span class="n">1</span>The headline</h2>
     <div class="callout">
       This home just came out of a <strong>~13-month, fully-permitted, down-to-the-structure
       renovation and addition</strong>. The final building inspection was signed off on
-      <strong>June 5, 2026 — eight days before this analysis</strong>. In practice you are buying
-      a near-new house inside an older shell: new foundation, new 200-amp service, new plumbing,
+      <strong>June 5, 2026 — eight days before this analysis</strong>. In practice you are buying a
+      near-new house inside an older shell: new foundation, new 200-amp service, new plumbing,
       framing, roof, and finishes.
     </div>
   </section>
 
+  <!-- PERMITS -->
   <section id="permits">
-    <h2><span class="num">2</span>Permit history</h2>
+    <h2 class="section-heading"><span class="n">2</span>Permit history</h2>
     <p class="lead">Three permits on record — one old, two that define the current house.</p>
 
     <div class="cards">
-      <div class="card">
-        <span class="pill info">2003 · Finaled</span>
+      <div class="pcard">
+        <span class="pill accent">2003 · Finaled</span>
         <h3>B03-1875 — Re-roof</h3>
-        <p class="muted" style="font-size:14px;margin:0">Tear-off of wood shingles, felt + 30-yr
-        composition roof. Routine. 2003 inspector flagged "big knots and weak boards" in the
-        sheathing then — likely superseded by the 2025 roof re-nail.</p>
+        <p>Tear-off of wood shingles, felt + 30-yr composition roof. Routine. The 2003 inspector
+        flagged "big knots and weak boards" in the sheathing then — likely superseded by the 2025 roof re-nail.</p>
       </div>
-      <div class="card">
-        <span class="pill good">2024–2026 · Finaled ★</span>
+      <div class="pcard">
+        <span class="pill green">2024–2026 · Finaled ★</span>
         <h3>B24-1660 — Addition &amp; Remodel</h3>
-        <p class="muted" style="font-size:14px;margin:0">On paper "add &amp; remodel 260 sf to 1st
-        floor &amp; 260 sf to basement." In the field, a gut renovation — see scope below.</p>
+        <p>On paper "add &amp; remodel 260 sf to 1st floor &amp; 260 sf to basement." In the field, a
+        gut renovation — full scope in the details below.</p>
       </div>
-      <div class="card">
-        <span class="pill warn">2025–2026 · Finaled*</span>
+      <div class="pcard">
+        <span class="pill muted">2025–2026 · Finaled*</span>
         <h3>CP25-0249 — Sewer lateral</h3>
-        <p class="muted" style="font-size:14px;margin:0">New SDR-26 lateral + public cleanout under
-        the sidewalk. <strong>Open thread:</strong> ENG ADMIN review went to HOLD 5/26/2026; city
-        asked for an encroachment permit. Confirm closed before COE.</p>
+        <p>New SDR-26 lateral + public cleanout under the sidewalk. One open thread: an engineering
+        admin hold over an encroachment permit. Confirm closed before COE.</p>
       </div>
     </div>
 
-    <div class="grid2" style="margin-top:24px">
-      <div>
-        <h3 style="font-size:16px">B24-1660 scope (what was really done)</h3>
+    <div class="grid2" style="margin-top:1.6rem">
+      <div class="panel">
+        <h4 class="mini" style="margin-top:0">B24-1660 — what was really done</h4>
         <ul class="tight">
           <li><strong>New foundation</strong> — 13 piers/caissons (4 front, 9 back); engineer letters required before pour</li>
-          <li><strong>New 200-amp electrical service</strong> + garage subpanel (meter release 9/8/2025)</li>
+          <li><strong>New 200-amp electrical service</strong> + garage subpanel (meter release Sep 8, 2025)</li>
           <li><strong>Shear walls</strong> rebuilt (corrected, then approved)</li>
           <li>New roof nailing, framing, insulation, sheetrock</li>
           <li>New plumbing (rough + underground), mechanical, full bath rebuild</li>
         </ul>
       </div>
-      <div>
-        <h3 style="font-size:16px">Timeline</h3>
-        <ul class="timeline">
-          <li><span class="d">Aug 5, 2024</span><br>Application filed</li>
-          <li><span class="d">Sep '24 – Mar '25</span><br>3+ plan-review cycles (incomplete plans, eng &amp; planning holds)</li>
-          <li><span class="d">Apr 22, 2025</span><br>Approved with conditions</li>
-          <li><span class="d">May 8, 2025</span><br>Permit issued — construction begins</li>
-          <li><span class="d">Jun 5, 2026</span><br><strong>Final building inspection passed</strong></li>
+      <div class="panel">
+        <h4 class="mini" style="margin-top:0">Timeline</h4>
+        <ul class="tight">
+          <li><strong>Aug 5, 2024</strong> — application filed</li>
+          <li><strong>Sep '24 – Mar '25</strong> — 3+ plan-review cycles (incomplete plans, eng &amp; planning holds)</li>
+          <li><strong>Apr 22, 2025</strong> — approved with conditions</li>
+          <li><strong>May 8, 2025</strong> — permit issued, construction begins</li>
+          <li><strong>Jun 5, 2026</strong> — final building inspection passed</li>
         </ul>
       </div>
     </div>
-    <p class="muted" style="font-size:13.5px">~9 months in plan check and ~13 months of construction.
-    Permit fees were modest (~$14K), consistent with a 260 sf "addition" on paper while field work
-    was a full gut.</p>
 
-    <h3 style="font-size:16px;margin-top:26px">Full permit details</h3>
-    <p class="muted" style="font-size:13.5px;margin-top:2px">Click any permit to expand dates, fees,
-    plan-review cycles, and inspection results (source: Redwood City permit records, APN 058-134-280).</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:500;margin:2rem 0 .3rem">Full permit details</h3>
+    <p style="font-size:.84rem;color:var(--ink-muted);margin-bottom:.4rem">Click any permit to expand dates, fees, plan-review cycles, and inspection results (Redwood City permit records, APN 058-134-280).</p>
 
-    <!-- B24-1660 -->
     <details class="permit" open>
-      <summary><span><span class="code">B24-1660</span>Addition &amp; Remodel — the major project ★</span><span class="chev">▶</span></summary>
+      <summary><span><span class="code">B24-1660</span><span class="lbl">Addition &amp; Remodel — the major project ★</span></span><span class="chev">▶</span></summary>
       <div class="body">
         <dl class="spec">
           <dt>Type</dt><dd>SFR Building · Addition</dd>
-          <dt>Scope</dt><dd>Add &amp; remodel 260 sf to 1st floor &amp; 260 sf to basement (field work was a full gut — see §2)</dd>
+          <dt>Scope</dt><dd>Add &amp; remodel 260 sf to 1st floor &amp; 260 sf to basement (field work was a full gut)</dd>
           <dt>Status</dt><dd><span class="res ok">Finaled</span></dd>
           <dt>Applied</dt><dd>Aug 5, 2024</dd>
           <dt>Approved (w/ conditions)</dt><dd>Apr 22, 2025</dd>
           <dt>Issued</dt><dd>May 8, 2025</dd>
           <dt>Finaled</dt><dd>Jun 5, 2026</dd>
         </dl>
-
         <h4 class="mini">Fees paid (≈ $13,815 total)</h4>
         <table class="insp">
           <tr><td>Aug 5, 2024</td><td>Plan check — single family (1–3 units)</td><td style="text-align:right">$7,353.53</td></tr>
           <tr><td>Apr 23, 2025</td><td>Building permit — single family (1–3 units)</td><td style="text-align:right">$6,257.39</td></tr>
           <tr><td>Oct 17, 2025</td><td>Electrical permit fees (alter)</td><td style="text-align:right">$204.22</td></tr>
         </table>
-
         <h4 class="mini">Plan-review history (3+ cycles)</h4>
         <table class="insp">
-          <tr><td>Sep 3–4, 2024</td><td>1st reviews — Bldg / Engr / Planning</td><td class="res corr">Not approved · incomplete plans</td></tr>
+          <tr><td>Sep 3–4, 2024</td><td>1st reviews — Bldg / Engr / Planning</td><td class="res corr">Not approved · incomplete</td></tr>
           <tr><td>Dec 18, 2024</td><td>2nd Fire review</td><td class="res ok">Approved</td></tr>
           <tr><td>Jan 3–6, 2025</td><td>2nd reviews — Bldg / Engr / Planning</td><td class="res corr">Not approved · planning hold</td></tr>
           <tr><td>Mar 12–17, 2025</td><td>3rd reviews — Bldg / Engr</td><td class="res corr">Not approved</td></tr>
-          <tr><td>Apr 15–22, 2025</td><td>Bldg &amp; Engr (4th) + permit-tech release</td><td class="res ok">Approved w/ conditions</td></tr>
+          <tr><td>Apr 15–22, 2025</td><td>Bldg &amp; Engr (4th) + permit-tech release</td><td class="res ok">Approved w/ cond</td></tr>
         </table>
-
         <h4 class="mini">Key inspections (chronological)</h4>
         <table class="insp">
-          <tr><td>Jul 7, 2025</td><td>Forms / footing — addition (pending engineer letter; phase 1 cleared to pour Jul 9)</td><td class="res corr">Partial</td></tr>
+          <tr><td>Jul 7, 2025</td><td>Forms / footing — addition (cleared to pour phase 1 Jul 9)</td><td class="res corr">Partial</td></tr>
           <tr><td>Jul 7, 2025</td><td>Sewer — needs SDR-26 pipe; possible encroachment permit</td><td class="res corr">Corrections</td></tr>
-          <tr><td>Jul 15, 2025</td><td>Complaint — trench shoring required (≥5 ft trenches)</td><td class="res corr">Corrections</td></tr>
+          <tr><td>Jul 15, 2025</td><td>Complaint — trench shoring required (≥5 ft)</td><td class="res corr">Corrections</td></tr>
           <tr><td>Aug 21, 2025</td><td>Piers / caissons — 13 piers (4 front, 9 back)</td><td class="res ok">Approved</td></tr>
           <tr><td>Sep 8, 2025</td><td>Electric service — 200-amp meter release</td><td class="res ok">Approved</td></tr>
           <tr><td>Sep 12 → 15, 2025</td><td>Exterior shear (added clips &amp; SDS screws)</td><td class="res ok">Approved</td></tr>
@@ -268,52 +301,45 @@
           <tr><td>Oct 21, 2025</td><td>Sheetrock</td><td class="res ok">Approved</td></tr>
           <tr><td>Nov 10–13, 2025</td><td>Shower pan &amp; interior lath / wet-wall</td><td class="res ok">Approved</td></tr>
           <tr><td>Apr 6, 2026</td><td>Complaint — dust from stone-cutting (crew told to wet-cut / mask)</td><td class="res corr">Investigated</td></tr>
-          <tr><td>May 22, 2026</td><td>Final building — 6-item punch list (handrails, water-heater insulation, fan sensors, GFCI, bonding, ejector-pump firewall support)</td><td class="res corr">Corrections</td></tr>
-          <tr><td>May 29, 2026</td><td>Final building — awaiting handrail + porta-potty removal</td><td class="res corr">Not ready</td></tr>
-          <tr><td>Jun 4, 2026</td><td>Final + smoke/CO — water-heater jumper bond &amp; downstairs CO alarm</td><td class="res corr">Corrections</td></tr>
+          <tr><td>May 22, 2026</td><td>Final building — 6-item punch list (handrails, WH insulation, fan sensors, GFCI, bonding, ejector-pump firewall)</td><td class="res corr">Corrections</td></tr>
+          <tr><td>May 29, 2026</td><td>Final — awaiting handrail + porta-potty removal</td><td class="res corr">Not ready</td></tr>
+          <tr><td>Jun 4, 2026</td><td>Final + smoke/CO — WH jumper bond &amp; downstairs CO alarm</td><td class="res corr">Corrections</td></tr>
           <tr><td>Jun 5, 2026</td><td><strong>Final building + smoke/CO alarms</strong></td><td class="res ok">Approved</td></tr>
         </table>
       </div>
     </details>
 
-    <!-- CP25-0249 -->
     <details class="permit">
-      <summary><span><span class="code">CP25-0249</span>Sewer lateral replacement</span><span class="chev">▶</span></summary>
+      <summary><span><span class="code">CP25-0249</span><span class="lbl">Sewer lateral replacement</span></span><span class="chev">▶</span></summary>
       <div class="body">
         <dl class="spec">
           <dt>Type</dt><dd>Construction Permits · U.G. Utilities</dd>
-          <dt>Scope</dt><dd>Replace sewer lateral underneath the sidewalk (new SDR-26 pipe + public cleanout)</dd>
-          <dt>Status</dt><dd><span class="res ok">Finaled</span> <span class="muted">(with an open admin item — see below)</span></dd>
+          <dt>Scope</dt><dd>Replace sewer lateral under the sidewalk (new SDR-26 pipe + public cleanout)</dd>
+          <dt>Status</dt><dd><span class="res ok">Finaled</span> <span style="color:var(--ink-muted)">(open admin item — below)</span></dd>
           <dt>Applied</dt><dd>Aug 1, 2025</dd>
           <dt>Approved / Issued</dt><dd>Oct 16, 2025</dd>
           <dt>Finaled</dt><dd>May 22, 2026</dd>
           <dt>Expires</dt><dd>Oct 16, 2026</dd>
         </dl>
-
         <h4 class="mini">Fees / deposits</h4>
         <table class="insp">
           <tr><td>Oct 1, 2025</td><td>Plan check &amp; inspection deposit</td><td style="text-align:right">$3,000.00</td></tr>
           <tr><td>—</td><td>Cash in lieu of bond</td><td style="text-align:right">$3,000.00</td></tr>
         </table>
-
         <h4 class="mini">Reviews &amp; inspections</h4>
         <table class="insp">
           <tr><td>Aug 20, 2025</td><td>1st engineering review</td><td class="res corr">Not approved</td></tr>
           <tr><td>Oct 1, 2025</td><td>2nd engineering review</td><td class="res corr">Not approved</td></tr>
-          <tr><td>Oct 7, 2025</td><td>3rd engineering review — "approved once bonds are provided"</td><td class="res ok">Appr w/ cond</td></tr>
-          <tr><td>May 22, 2026</td><td>Final engineering — backfilled with perm &amp; base rock, final given</td><td class="res ok">Final given</td></tr>
-          <tr><td>May 26, 2026</td><td>Eng admin review — city wants an <strong>encroachment permit</strong> for the public cleanout</td><td class="res hold">On hold</td></tr>
+          <tr><td>Oct 7, 2025</td><td>3rd engineering — "approved once bonds are provided"</td><td class="res ok">Appr w/ cond</td></tr>
+          <tr><td>May 22, 2026</td><td>Final engineering — backfilled w/ perm &amp; base rock, final given</td><td class="res ok">Final given</td></tr>
+          <tr><td>May 26, 2026</td><td>Eng admin — city wants an <strong>encroachment permit</strong> for the public cleanout</td><td class="res hold">On hold</td></tr>
         </table>
-        <div class="callout warn" style="margin-top:14px">
-          <strong>Open thread:</strong> confirm the encroachment permit / ENG admin hold is fully
-          closed before close of escrow.
-        </div>
+        <div class="callout warn"><strong>Open thread:</strong> confirm the encroachment permit / ENG admin hold is fully closed before close of escrow.</div>
       </div>
     </details>
 
-    <!-- B03-1875 -->
     <details class="permit">
-      <summary><span><span class="code">B03-1875</span>Re-roof (2003)</span><span class="chev">▶</span></summary>
+      <summary><span><span class="code">B03-1875</span><span class="lbl">Re-roof (2003)</span></span><span class="chev">▶</span></summary>
       <div class="body">
         <dl class="spec">
           <dt>Type</dt><dd>Building · Repair Residential</dd>
@@ -324,39 +350,33 @@
         </dl>
         <h4 class="mini">Inspections</h4>
         <table class="insp">
-          <tr><td>Sep 10, 2003</td><td>Roof tear-off — note: replace big knots &amp; weak boards (sheathing rot then; likely superseded by 2025 roof re-nail)</td><td class="res ok">Approved</td></tr>
+          <tr><td>Sep 10, 2003</td><td>Roof tear-off — note: replace big knots &amp; weak boards (sheathing rot then)</td><td class="res ok">Approved</td></tr>
           <tr><td>Sep 18, 2003</td><td>Final building (insp. R. Bellew)</td><td class="res ok">Approved</td></tr>
         </table>
       </div>
     </details>
   </section>
 
+  <!-- DILIGENCE -->
   <section id="flags">
-    <h2><span class="num">3</span>Diligence &amp; watch-items</h2>
+    <h2 class="section-heading"><span class="n">3</span>Diligence &amp; watch-items</h2>
     <p class="lead">Nothing alarming, but concrete things to verify.</p>
-    <ul class="tight">
-      <li><strong>Investor/developer renovation, not a long-term owner's home.</strong> Listed within
-        days of final. Scrutinize finish quality; ask who the GC and structural engineer were and
-        whether there's a workmanship warranty.</li>
-      <li><strong>Construction-period neighbor friction:</strong> a dust complaint over stone-cutting
-        (Apr 2026) and a trench-shoring safety correction (Jul 2025). Both resolved, but they point
-        to an aggressive job site.</li>
-      <li><strong>Final punch list (5/22/2026), cleared 6/5/2026:</strong> missing stair handrails,
-        UV insulation on outdoor water-heater lines, bath-fan humidity sensors, attic-furnace GFCI,
-        intersystem bonding, water-heater jumper bond, and a too-temporary support penetrating the
-        <em>garage firewall</em> for the ejector-pump drain. Verify the firewall fix is permanent.</li>
-      <li><strong>Basement + sewage ejector pump</strong> (mechanical, needs maintenance) and a
-        13-pier foundation suggest a sloped lot with soils/drainage considerations — ask for a
-        geotech report.</li>
-      <li><strong>Outdoor water heater</strong> (lines needed UV insulation) — confirm it's tankless
-        and properly weather/freeze protected.</li>
-    </ul>
+    <div class="panel">
+      <ul class="tight">
+        <li><strong>Investor/developer renovation, not a long-term owner's home.</strong> Listed within days of final. Scrutinize finish quality; ask who the GC and structural engineer were and whether there's a workmanship warranty.</li>
+        <li><strong>Construction-period neighbor friction:</strong> a dust complaint over stone-cutting (Apr 2026) and a trench-shoring safety correction (Jul 2025). Both resolved, but they point to an aggressive job site.</li>
+        <li><strong>Final punch list (5/22/2026), cleared 6/5/2026:</strong> missing stair handrails, UV insulation on outdoor water-heater lines, bath-fan humidity sensors, attic-furnace GFCI, intersystem bonding, WH jumper bond, and a too-temporary support penetrating the <em>garage firewall</em> for the ejector-pump drain. Verify the firewall fix is permanent.</li>
+        <li><strong>Basement + sewage ejector pump</strong> (mechanical, needs maintenance) and a 13-pier foundation suggest a sloped lot with soils/drainage considerations — ask for a geotech report.</li>
+        <li><strong>Outdoor water heater</strong> (lines needed UV insulation) — confirm it's tankless and properly weather/freeze protected.</li>
+      </ul>
+    </div>
   </section>
 
+  <!-- COMPS -->
   <section id="comps">
-    <h2><span class="num">4</span>Pricing vs. comps</h2>
+    <h2 class="section-heading"><span class="n">4</span>Pricing vs. comps</h2>
     <p class="lead">All nine listings on a price-per-square-foot basis.</p>
-    <div class="tablewrap">
+    <div class="table-wrap">
     <table>
       <thead>
         <tr><th>Property</th><th>City</th><th class="num">Price</th><th>BD/BA</th><th class="num">Sqft</th><th class="num">$/sqft</th></tr>
@@ -374,131 +394,91 @@
       </tbody>
     </table>
     </div>
-
-    <div class="callout warn">
-      <strong>Comp-set median ≈ $1,150/sqft. The subject at $1,375 sits ~20% above it</strong> — the
-      highest $/sqft of any Redwood City / Emerald Hills comp (only Palo Alto's Oxford Ave is higher,
-      a pricier submarket).
-    </div>
-
+    <div class="callout warn"><strong>Comp-set median ≈ $1,150/sqft. The subject at $1,375 sits ~20% above it</strong> — the highest $/sqft of any Redwood City / Emerald Hills comp (only Palo Alto's Oxford Ave is higher, a pricier submarket).</div>
     <div class="grid2">
-      <div class="card">
-        <h3>vs. 313 Lakeview Way</h3>
-        <p class="muted" style="font-size:14px;margin:0">Same 4/3.5, <em>larger</em> at 3,055 sqft,
-        listed $3.399M. Subject asks <strong>+$589K for ~150 fewer sqft</strong>.</p>
-      </div>
-      <div class="card">
-        <h3>vs. 1969 Kentucky St</h3>
-        <p class="muted" style="font-size:14px;margin:0">Nearly identical size (2,897 sqft), listed
-        $3.149M, but in the 94061 flats. Subject asks <strong>+$839K</strong>.</p>
-      </div>
+      <div class="pcard"><h3>vs. 313 Lakeview Way</h3><p>Same 4/3.5, <em>larger</em> at 3,055 sqft, listed $3.399M. Subject asks <strong>+$589K for ~150 fewer sqft</strong>.</p></div>
+      <div class="pcard"><h3>vs. 1969 Kentucky St</h3><p>Nearly identical size (2,897 sqft), listed $3.149M, but in the 94061 flats. Subject asks <strong>+$839K</strong>.</p></div>
     </div>
-    <p style="margin-top:18px">The premium is being paid almost entirely for <strong>condition</strong>
-    — brand-new structure and systems vs. older/larger comps. Defensible for a turnkey "new" house,
-    but on pure size it's top-of-submarket pricing with little headroom.</p>
+    <p style="margin-top:1.2rem;color:var(--ink-light)">The premium is being paid almost entirely for <strong>condition</strong> — brand-new structure and systems vs. older/larger comps. Defensible for a turnkey "new" house, but on pure size it's top-of-submarket pricing with little headroom.</p>
   </section>
 
+  <!-- COMMUTE -->
   <section id="commute">
-    <h2><span class="num">5</span>Commute</h2>
-    <p class="lead">Approximate driving times in typical Peninsula traffic. The home sits in the
-    Eagle Hill hills just SW of downtown Redwood City, with quick access to both US-101 and I-280.</p>
+    <h2 class="section-heading"><span class="n">5</span>Commute</h2>
+    <p class="lead">Approximate driving times in typical Peninsula traffic. The home sits in the Eagle Hill hills just SW of downtown Redwood City, with quick access to both US-101 and I-280.</p>
     <div class="mapwrap">
-      <iframe loading="lazy" title="Map of 416 Quartz St, Redwood City"
+      <iframe loading="lazy" title="Map of 416 Quartz St"
         src="https://www.google.com/maps?q=416+Quartz+St,+Redwood+City,+CA+94062&z=13&output=embed"></iframe>
     </div>
-    <p class="maplink">📍 416 Quartz St, Redwood City · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/3375+Edison+Way,+Menlo+Park,+CA" target="_blank" rel="noopener">Directions to Synapse</a> · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/3410+Hillview+Ave,+Palo+Alto,+CA" target="_blank" rel="noopener">to SAP</a> · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/1600+Amphitheatre+Pkwy,+Mountain+View,+CA" target="_blank" rel="noopener">to Googleplex</a></p>
-    <div class="tablewrap">
+    <p class="maplink">📍 416 Quartz St · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/3375+Edison+Way,+Menlo+Park,+CA" target="_blank" rel="noopener">Directions to Synapse</a> · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/3410+Hillview+Ave,+Palo+Alto,+CA" target="_blank" rel="noopener">to SAP</a> · <a href="https://www.google.com/maps/dir/416+Quartz+St,+Redwood+City,+CA/1600+Amphitheatre+Pkwy,+Mountain+View,+CA" target="_blank" rel="noopener">to Googleplex</a></p>
+    <div class="table-wrap" style="margin-top:1.2rem">
     <table>
       <thead>
         <tr><th>Destination</th><th>Address</th><th class="num">Distance</th><th class="num">Off-peak</th><th class="num">Peak</th><th>Typical route</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Synapse School</strong></td><td>3375 Edison Way, Menlo Park</td><td class="num">~5 mi</td><td class="num">~14 min</td><td class="num">~18–22 min</td><td>El Camino / Bay Rd to Marsh Rd</td></tr>
-        <tr><td><strong>SAP Labs</strong> (Bldg 10)</td><td>3410 Hillview Ave, Palo Alto</td><td class="num">~11 mi</td><td class="num">~18 min</td><td class="num">~25–30 min</td><td>I-280 S → Page Mill Rd → Hillview</td></tr>
-        <tr><td><strong>Googleplex</strong></td><td>1600 Amphitheatre Pkwy, Mtn View</td><td class="num">~14 mi</td><td class="num">~20 min</td><td class="num">~30–40 min</td><td>US-101 S or I-280 S</td></tr>
+        <tr><td>Synapse School</td><td>3375 Edison Way, Menlo Park</td><td class="num">~5 mi</td><td class="num">~14 min</td><td class="num">~18–22 min</td><td>El Camino / Bay Rd → Marsh Rd</td></tr>
+        <tr><td>SAP Labs (Bldg 10)</td><td>3410 Hillview Ave, Palo Alto</td><td class="num">~11 mi</td><td class="num">~18 min</td><td class="num">~25–30 min</td><td>I-280 S → Page Mill Rd</td></tr>
+        <tr><td>Googleplex</td><td>1600 Amphitheatre Pkwy, Mtn View</td><td class="num">~14 mi</td><td class="num">~20 min</td><td class="num">~30–40 min</td><td>US-101 S or I-280 S</td></tr>
       </tbody>
     </table>
     </div>
-    <div class="callout">
-      <strong>School run (Synapse):</strong> the shortest and most predictable of the three — a short
-      hop down to north Menlo Park near Marsh Rd. <strong>SAP &amp; Google</strong> both favor I-280,
-      which from Eagle Hill is the faster, more reliable corridor than 101 at peak.
-    </div>
-    <p class="muted" style="font-size:13.5px"><strong>Transit option:</strong> Redwood City Caltrain
-    is ~1 mile (downtown). Caltrain reaches Palo Alto / California Ave (near SAP, ~15 min on a Limited)
-    and Mountain View (Google shuttle connection). Distances/times are estimates — verify for your exact
-    departure window.</p>
+    <div class="callout"><strong>School run (Synapse)</strong> is the shortest and most predictable. <strong>SAP &amp; Google</strong> both favor I-280, the faster, more reliable corridor from Eagle Hill than 101 at peak. <strong>Transit:</strong> Redwood City Caltrain is ~1 mile (downtown), reaching Palo Alto / California Ave (near SAP) and Mountain View (Google shuttle). Times are estimates.</div>
+    <p style="font-size:.78rem;color:var(--ink-muted)">"Building 10" is per your spec — public sources confirm the 3410 Hillview Ave campus but don't expose individual building numbers.</p>
   </section>
 
+  <!-- WALKABILITY -->
   <section id="walk">
-    <h2><span class="num">6</span>Walkability</h2>
-    <p class="lead">Eagle Hill is a quiet, hilly, almost entirely residential pocket — pleasant to walk
-    <em>in</em>, but you drive to most errands.</p>
-
+    <h2 class="section-heading"><span class="n">6</span>Walkability</h2>
+    <p class="lead">Eagle Hill is a quiet, hilly, almost entirely residential pocket — pleasant to walk <em>in</em>, but you drive to most errands.</p>
     <div class="mapwrap">
-      <iframe loading="lazy" title="Eagle Hill neighborhood around 416 Quartz St"
+      <iframe loading="lazy" title="Eagle Hill neighborhood"
         src="https://www.google.com/maps?q=416+Quartz+St,+Redwood+City,+CA+94062&z=16&output=embed"></iframe>
     </div>
-    <p class="maplink" style="margin-bottom:18px">Eagle Hill, Redwood City — hilly streets that follow the contour of the hill.</p>
-
-    <div class="stats" style="margin-bottom:20px">
-      <div class="stat"><div class="k">Walk Score (nearby 434 Quartz)</div><div class="v">~55 <small class="muted" style="font-size:13px">Somewhat Walkable</small></div></div>
-      <div class="stat"><div class="k">Terrain</div><div class="v">Hilly</div></div>
-      <div class="stat"><div class="k">In-neighborhood stores</div><div class="v">None</div></div>
+    <p class="maplink" style="margin-bottom:1.2rem">Eagle Hill, Redwood City — hilly streets that follow the contour of the hill.</p>
+    <div class="snapshot" style="margin-bottom:1.4rem">
+      <div class="snap"><div class="k">Walk Score (nearby 434 Quartz)</div><div class="v">~55</div></div>
+      <div class="snap"><div class="k">Rating</div><div class="v">Somewhat walkable</div></div>
+      <div class="snap"><div class="k">Terrain</div><div class="v">Hilly</div></div>
+      <div class="snap"><div class="k">In-neighborhood stores</div><div class="v">None</div></div>
     </div>
-
     <div class="grid2">
-      <div>
-        <h3 style="font-size:16px;color:var(--good)">Walkable from the door</h3>
+      <div class="panel">
+        <h4 class="mini" style="margin-top:0;color:var(--green)">Walkable from the door</h4>
         <ul class="tight">
-          <li><strong>Quartz St &amp; Avenue Del Ora parklet</strong> — a small triangular green
-            literally where the street splits, essentially at the doorstep.</li>
-          <li><strong>John Gill Elementary School</strong> — 7-acre campus, a few blocks away;
-            local public schools rate above average.</li>
-          <li><strong>Three more neighborhood parklets</strong> — Alameda de las Pulgas &amp; Hopkins;
-            Brewster &amp; Hillview; and the largest, <strong>Laurie Duncan Parkway</strong> at
-            Brewster &amp; Nevada (picnic benches).</li>
-          <li>Quiet, low-traffic streets that follow the hill — good for strolls and dog walks.</li>
+          <li><strong>Quartz St &amp; Avenue Del Ora parklet</strong> — a small triangular green right where the street splits, essentially at the doorstep.</li>
+          <li><strong>John Gill Elementary School</strong> — 7-acre campus a few blocks away; local public schools rate above average.</li>
+          <li><strong>Three more neighborhood parklets</strong> — Alameda de las Pulgas &amp; Hopkins; Brewster &amp; Hillview; and the largest, Laurie Duncan Parkway at Brewster &amp; Nevada (picnic benches).</li>
+          <li>Quiet, low-traffic streets — good for strolls and dog walks.</li>
         </ul>
       </div>
-      <div>
-        <h3 style="font-size:16px;color:var(--accent)">A longer walk / short drive</h3>
+      <div class="panel">
+        <h4 class="mini" style="margin-top:0;color:var(--accent)">A longer walk / short drive</h4>
         <ul class="tight">
-          <li><strong>Red Morton Community Park</strong> (~1 mi) — the all-abilities
-            <strong>Magical Bridge Playground</strong>, skate park, soccer fields, basketball,
-            and Dove pool.</li>
-          <li><strong>Downtown Redwood City</strong> (~1 mi, ~20 min walk) — Courthouse Square,
-            restaurants, cinema, farmers' market, and Caltrain. Downhill out, uphill back.</li>
+          <li><strong>Red Morton Community Park</strong> (~1 mi) — all-abilities Magical Bridge Playground, skate park, soccer fields, basketball, Dove pool.</li>
+          <li><strong>Downtown Redwood City</strong> (~1 mi, ~20 min walk) — Courthouse Square, restaurants, cinema, farmers' market, Caltrain. Downhill out, uphill back.</li>
           <li><strong>Sequoia High School</strong> &amp; the El Camino corridor for everyday services.</li>
-          <li><strong>Groceries:</strong> none in-neighborhood — nearest supermarkets are a short drive
-            toward downtown / Woodside Plaza.</li>
+          <li><strong>Groceries:</strong> none in-neighborhood — nearest supermarkets are a short drive toward downtown / Woodside Plaza.</li>
         </ul>
       </div>
     </div>
-
-    <div class="callout warn">
-      <strong>Bottom line on walkability:</strong> charming for walks, parklets, and the elementary
-      school, and downtown + a major playground are within a (hilly) mile. But with no stores in the
-      neighborhood and steep streets, it's car-oriented for groceries and daily errands — typical of
-      a hillside Peninsula enclave.
-    </div>
-    <p class="muted" style="font-size:13px">Walkability details from <em>Walking Redwood City</em> and
-    Walk Score (neighboring 434 Quartz St).</p>
+    <div class="callout warn"><strong>Bottom line:</strong> charming for walks, parklets, and the elementary school, and downtown + a major playground are within a (hilly) mile — but with no stores in the neighborhood and steep streets, it's car-oriented for groceries and daily errands.</div>
   </section>
 
+  <!-- VERDICT -->
   <section id="bottom">
-    <h2><span class="num">7</span>Bottom line</h2>
+    <h2 class="section-heading"><span class="n">7</span>Bottom line</h2>
     <div class="grid2">
-      <div>
-        <h3 style="color:var(--good)">Pros</h3>
+      <div class="panel">
+        <h4 class="mini" style="margin-top:0;color:var(--green)">Pros</h4>
         <ul class="tight">
           <li>Effectively new: foundation, 200-amp service, plumbing, framing, roof, baths — all permitted and finaled 6/5/2026. Low near-term capex risk.</li>
           <li>Eagle Hill / Emerald Hills commands a premium over the 94061 flats.</li>
           <li>Clean permit closure — additions are legal and finaled (no unpermitted-work risk).</li>
         </ul>
       </div>
-      <div>
-        <h3 style="color:var(--bad)">Cons / watch-items</h3>
+      <div class="panel">
+        <h4 class="mini" style="margin-top:0;color:var(--red)">Cons / watch-items</h4>
         <ul class="tight">
           <li>Top-of-submarket $/sqft (~20% over median); premium rides entirely on condition.</li>
           <li>Investor renovation — verify build quality, GC/engineer, warranties.</li>
@@ -508,25 +488,28 @@
         </ul>
       </div>
     </div>
-
-    <h3 style="margin-top:24px">Questions for the listing agent</h3>
-    <ul class="tight">
-      <li>Who was the GC and structural engineer, and is there a workmanship warranty?</li>
-      <li>Is the CP25-0249 sewer encroachment permit / ENG hold fully resolved?</li>
-      <li>Does the 2,901 sqft include the new finished basement? Bedroom/bath split by floor?</li>
-      <li>Was the ejector-pump firewall support permanently corrected (final punch item)?</li>
-      <li>Is there a soils/geotech report for the 13-pier foundation?</li>
-    </ul>
+    <div class="panel" style="margin-top:1.4rem">
+      <h4 class="mini" style="margin-top:0">Questions for the listing agent</h4>
+      <ul class="tight">
+        <li>Who was the GC and structural engineer, and is there a workmanship warranty?</li>
+        <li>Is the CP25-0249 sewer encroachment permit / ENG hold fully resolved?</li>
+        <li>Does the 2,901 sqft include the new finished basement? Bedroom/bath split by floor?</li>
+        <li>Was the ejector-pump firewall support permanently corrected (final punch item)?</li>
+        <li>Is there a soils/geotech report for the 13-pier foundation?</li>
+      </ul>
+    </div>
   </section>
 
 </main>
 
-<footer class="wrap">
-  <span class="tag">Data as supplied</span>
-  <span class="tag">Not investment advice</span>
-  Figures derive from the listing data and Redwood City permit records provided. Live Redfin
-  fields (days on market, year built, tax history) were not pulled. Seller contact details
-  intentionally omitted.
+<footer>
+  <div>
+    <span class="tag">Data as supplied</span>
+    <span class="tag">Not investment advice</span>
+  </div>
+  Figures derive from the listing data and Redwood City permit records provided. Live Redfin fields
+  (days on market, year built, tax history) were not pulled. Listing photos are hosted by Redfin and
+  remain © their respective owners. Seller contact details intentionally omitted.
 </footer>
 
 </body>

@@ -151,6 +151,13 @@ hills just SW of downtown Redwood City, with quick access to both US-101 and I-2
   101 at peak.
 - **Transit:** Redwood City Caltrain is ~1 mile (downtown). Caltrain reaches Palo Alto /
   California Ave (near SAP, ~15 min on a Limited) and Mountain View (Google shuttle connection).
+
+**Local / walkable distances**
+
+| Destination | Distance | Walk | Drive |
+|---|--:|--:|--:|
+| Downtown Redwood City (Courthouse Sq) | ~1.1 mi | ~22 min | ~5 min |
+| 2004 Hopkins Ave | ~0.5 mi | ~10 min | ~3 min |
 - *Note:* "Building 10" is per your spec — public sources confirm the 3410 Hillview Ave campus
   but don't expose individual building numbers. Times are estimates (no live routing API).
 

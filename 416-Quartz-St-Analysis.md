@@ -1,4 +1,4 @@
-# 416 Quartz St, Redwood City, CA 94062 — Property & Permit Analysis
+# Quartz House — 416 Quartz St, Redwood City, CA 94062 — Property & Permit Analysis
 
 *Prepared 2026-06-13 · APN 058-134-280 · Eagle Hill neighborhood (Redfin tags "Emerald Hills")*
 

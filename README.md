@@ -1,6 +1,6 @@
-# 416 Quartz St — Property & Permit Analysis
+# Quartz House — Property & Permit Analysis
 
-A single-page static site analyzing the listing at **416 Quartz St, Redwood City, CA 94062**
+A single-page static site analyzing **Quartz House** — the listing at **416 Quartz St, Redwood City, CA 94062**
 ($3,988,000 · 4 BD / 3.5 BA · 2,901 sqft), its Redwood City building-permit history, and a
 nine-property comp set.
 
